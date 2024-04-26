@@ -31,4 +31,22 @@ public class ExpenseManager {
         }
         return summary;
     }
+
+    public void saveExpensesToFile(String gastos) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(gastos))) {
+            outputStream.writeObject(expenses);
+            System.out.println("Gastos guardados en el archivo: " + gastos);
+        } catch (IOException e) {
+            System.err.println("Error al guardar los gastos en el archivo: " + e.getMessage());
+        }
+    }
+
+    public void loadExpensesFromFile(String gastos) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(gastos))) {
+            this.expenses = (List<Map<String, Double>>) inputStream.readObject();
+            System.out.println("Gastos cargados desde el archivo: " + gastos);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error al cargar los gastos desde el archivo: " + e.getMessage());
+        }
+    }
 }
