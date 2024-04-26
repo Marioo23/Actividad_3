@@ -31,6 +31,21 @@ public class Expense {
     public void setcategoria(String category) {
         this.categoria = categoria;
     }
+
+	public void Expense(double gastos, String categoria) {
+    	
+        if (gastos <= 0) {
+            throw new IllegalArgumentException("La cantidad del gasto debe ser mayor que cero.");
+        }
+        this.gastos  = gastos;
+        
+        if (categoria == null || categoria.trim().isEmpty()) {
+            throw new IllegalArgumentException("La categoría del gasto no puede estar vacía.");
+        }
+        this.categoria = categoria.trim();
+    }
+
+    }
 }
 	
 	
